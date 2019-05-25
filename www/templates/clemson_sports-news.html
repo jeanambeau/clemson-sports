@@ -1,0 +1,48 @@
+	<ion-view view-title=" News" hide-nav-bar="false" >
+		<!-- content -->
+		<ion-content delegate-handle="top"   id="page-news" class=" page-news">
+		
+			<!-- code refresh -->
+			<ion-refresher pulling-text="{{ 'Pull to refresh...' | translate }}"  on-refresh="doRefresh()"></ion-refresher>
+			<!-- ./code refresh -->
+			
+
+			<!-- code search -->
+			<ion-list class="list" >
+				<div class="item item-input">
+					<i class="icon ion-search placeholder-icon"></i>
+					<input type="search" ng-model="filter_newss" placeholder="{{ 'Search' | translate }}" aria-label="filter newss" />
+				</div>
+			</ion-list>
+			<!-- ./code search -->
+
+
+			<!-- code listing -->
+			<div class="list animate-none">
+				<a class="item colorful" ng-repeat="item in newss | filter:filter_newss as results" ng-init="$last ? fireEvent() : null" ng-href="#/clemson_sports/news_singles/{{item.post_1}}" >
+				</a>
+			</div>
+			<!-- ./code listing -->
+
+
+			<!-- code infinite scroll -->
+			<ion-list class="list">
+				<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="onInfinite()" distance="5px" ng-if="hasMoreData"></ion-infinite-scroll>
+			</ion-list>
+			<!-- ./code infinite scroll -->
+
+
+			<!-- code search result not found -->
+			<ion-list class="list">
+				<div class="item" ng-if="results.length == 0" >
+					<p>{{ 'No results found...!' | translate }}</p>
+				</div>
+			</ion-list>
+			<!-- code search result not found -->
+
+
+
+
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>
